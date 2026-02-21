@@ -1,0 +1,15 @@
+# Visual Studio Temporary files & dirs
+.vs/
+x64/
+Debug/
+Release/
+*.user
+*.aps
+*.opendb
+*.pdb
+
+# Compiled Object files
+*.obj
+*.log
+*.tlog
+*.lastbuildstate
