@@ -80,3 +80,25 @@ double Regime_PositionSize(int regime, double balance, double drawdown)
     double lot = balance * risk / 1000.0;
     return std::max(lot, 0.01);
 }
+
+// ✅ Wrap this in a function
+extern "C" __declspec(dllexport)
+void FillReturnsAndCalculateDrawdown(double* out_returns, int* out_count, double* out_max_dd_p95)
+{
+    int count = 0;
+
+    // You cannot call MQL5-specific functions like HistoryDealsTotal() here
+    // This would need to be called from MQL5 side and pass the returns array to DLL
+    // Example assumes returns are already filled by MQL5
+
+    // Just for demonstration: simulate some returns
+    for (int i = 0; i < 50; i++)
+    {
+        out_returns[i] = (rand() % 2000 - 1000) / 10000.0; // random -0.1..0.1
+        count++;
+    }
+
+    *out_count = count;
+
+    MonteCarlo_Drawdown(out_returns, count, out_max_dd_p95);
+}
